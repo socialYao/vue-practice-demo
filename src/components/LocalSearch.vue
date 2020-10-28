@@ -1,11 +1,12 @@
 <template>
   <div class="localsearch">
     <div class="tips">
-      所谓局部搜索就是指在所有数据都已知的情况下，按照一定条件去搜索数据。
+      所谓局部搜索就是指在所有数据都已知的情况下，按照一定条件去搜索数据。 采用mock模拟数据.
       思路：
       1、考虑到要实现的效果是一边搜一边展示结果，所以适合用computed来实现搜索结果。（computed可以实时监听属性的变化）
       2、一旦监听搜索值变化了就要修改渲染的结果。
       3、搜索之前要去除前后空格，要验证是否为空。toLowerCase()把英文大写都转成小写判断，这样就不区分大小写了。
+		适用场景，一边输入一边提示历史记录
     </div>
     <BackHome />
     <h3>局部搜索</h3>
@@ -28,20 +29,7 @@ export default {
   },
   data() {
     return {
-      userLists: [
-        { id: 1, username: "Kitty", age: 18, sex: "女" },
-        { id: 2, username: "张三", age: 22, sex: "男" },
-        { id: 3, username: "李四", age: 15, sex: "女" },
-        { id: 4, username: "张三", age: 32, sex: "男" },
-        { id: 5, username: "王五", age: 20, sex: "男" },
-        { id: 6, username: "Kitty", age: 18, sex: "女" },
-        { id: 7, username: "王六", age: 40, sex: "女" },
-        { id: 8, username: "Kitty", age: 18, sex: "女" },
-        { id: 9, username: "李四", age: 25, sex: "男" },
-        { id: 10, username: "王五", age: 18, sex: "女" },
-        { id: 11, username: "Kitty", age: 30, sex: "女" },
-        { id: 12, username: "Kitty", age: 28, sex: "女" },
-      ],
+      userLists: [],
       searname: "",
     };
   },
@@ -59,6 +47,20 @@ export default {
       }
       return arr;
     },
+  },
+  methods:{
+	/**
+	* 获取数据
+	*/
+	getUserLists:function(){
+		var _this = this;
+		_this.$http.get('api/userslist').then(res=>{
+			_this.userLists = res.data.data;
+		});
+	},
+  },
+  mounted(){
+	this.getUserLists();
   },
 };
 </script>

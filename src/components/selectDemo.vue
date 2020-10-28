@@ -2,9 +2,9 @@
   <div>
     <h1>vue练习Demo展示(点击查看效果)</h1>
     <div class="btngroup">
-      <router-link to="/LocalSearch"><button>局部搜索</button></router-link>
-      <router-link to="/LocalSort"><button>局部排序</button></router-link>
-	  <router-link to="/TodoList"><button>TodoList</button></router-link>
+		<router-link to="/LocalSearch"><button>局部搜索</button></router-link>
+		<router-link to="/LocalSort"><button>局部排序</button></router-link>
+		<router-link to="/TodoList"><button>TodoList</button></router-link>
     </div>
   </div>
 </template>

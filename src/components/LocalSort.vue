@@ -33,20 +33,7 @@ export default {
   },
   data() {
     return {
-      userLists: [
-        { id: 1, username: "Kitty", age: 18, sex: "女" },
-        { id: 2, username: "张三", age: 22, sex: "男" },
-        { id: 3, username: "李四", age: 15, sex: "女" },
-        { id: 4, username: "张三", age: 32, sex: "男" },
-        { id: 5, username: "王五", age: 20, sex: "男" },
-        { id: 6, username: "Kitty", age: 18, sex: "女" },
-        { id: 7, username: "王六", age: 40, sex: "女" },
-        { id: 8, username: "Kitty", age: 18, sex: "女" },
-        { id: 9, username: "李四", age: 25, sex: "男" },
-        { id: 10, username: "王五", age: 18, sex: "女" },
-        { id: 11, username: "Kitty", age: 30, sex: "女" },
-        { id: 12, username: "Kitty", age: 28, sex: "女" },
-      ],
+      userLists: [],
       searname: "",
       sortType: 0, //排序类型，0--默认排序，1--升序排序，2--降序排序
     };
@@ -83,7 +70,19 @@ export default {
     sortFun(type) {
       this.sortType = type;
     },
+	/**
+	 * 获取数据
+	 */
+	getUserLists:function(){
+		var _this = this;
+		_this.$http.get('api/userslist').then(res=>{
+			_this.userLists = res.data.data;
+		});
+	},
   },
+  mounted(){
+		this.getUserLists();
+  }
 };
 </script>
 
